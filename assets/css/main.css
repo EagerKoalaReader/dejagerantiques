@@ -1380,7 +1380,7 @@ textarea {
   border-top: 2px solid var(--light);
   overflow: hidden;
   padding: 2rem 0;
-  margin: 7.5rem 4% 0;
+  margin: 1.5rem 4% 0;
   text-align: center;
 }
 @media all and (min-width: 56.25em) {
