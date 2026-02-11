@@ -848,7 +848,7 @@ textarea {
   outline: 2px dotted var(--color);
 }
 .main__right {
-  margin-top: 3.75rem;
+  margin-top: 2rem;
   padding: 0 4%;
 }
 @media all and (min-width: 56.25em) {
@@ -1381,7 +1381,7 @@ textarea {
   overflow: hidden;
   padding: 2rem 0;
   margin: 1.5rem 4% 0;
-  text-align: center;
+  text-align: left;
 }
 @media all and (min-width: 56.25em) {
   .footer {
