@@ -87,7 +87,6 @@ if (container && toggleButton) {
 	}
 })();
 
-
 // Responsive embeds script
 (function () {
 	let wrappers = document.querySelectorAll('.post__video, .post__iframe');
