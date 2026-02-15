@@ -1547,3 +1547,17 @@ textarea {
   -webkit-transform: translate(-50%, 0);
           transform: translate(-50%, 0);
 }
+/* === De Jager Fade In Effect === */
+
+.content__entry {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: dejagerFade 1.2s ease forwards;
+}
+
+@keyframes dejagerFade {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
