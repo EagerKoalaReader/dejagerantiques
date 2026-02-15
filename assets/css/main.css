@@ -1561,24 +1561,5 @@ textarea {
     opacity: 1;
     transform: translateY(0);
   }
-    /* === De Jager Feed Fade In (Safe Version) === */
 
-.feed__item {
-  opacity: 0;
-  animation: dejagerFeedFade 0.9s ease forwards;
-}
-
-.feed__item:nth-child(1) { animation-delay: 0.1s; }
-.feed__item:nth-child(2) { animation-delay: 0.2s; }
-.feed__item:nth-child(3) { animation-delay: 0.3s; }
-.feed__item:nth-child(4) { animation-delay: 0.4s; }
-.feed__item:nth-child(5) { animation-delay: 0.5s; }
-
-@keyframes dejagerFeedFade {
-  to {
-    opacity: 1;
-  }
-}
-
-  
 }
