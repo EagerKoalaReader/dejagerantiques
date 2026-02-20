@@ -24,7 +24,7 @@
             <link rel="preload" href="https://dejageruniverse.digital/assets/dynamic/fonts/archivonarrow/archivonarrow-italic.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="stylesheet" href="https://dejageruniverse.digital/assets/css/style.css?v=a17a994a93685521857addb17559f33d">	
-        <script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://dejageruniverse.digital/book1chapter1/"},"headline":"Book 1 - Victoria House - Part 1 of 8","datePublished":"2026-01-27T12:33+00:00","dateModified":"2026-02-15T01:55+00:00","image":{"@type":"ImageObject","url":"https://dejageruniverse.digital/media/posts/1/Victoria-House-Hero-Image-P1.jpg","height":4088,"width":4088},"description":"De Jager Antiques is supernatural horror fantasy web series by Daniel Leirgulen. Always free to read.  Book 1 - Victoria House, part 1. ","author":{"@type":"Person","name":"Daniel Leirgulen","url":"https://dejageruniverse.digital/authors/jdhaff/"},"publisher":{"@type":"Organization","name":"Daniel Leirgulen","logo":{"@type":"ImageObject","url":"https://dejageruniverse.digital/media/website/De-Jager-Symbol.png","height":186,"width":85}}}</script>      
+        <script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://dejageruniverse.digital/book1chapter1/"},"headline":"Book 1 - Victoria House - Part 1 of 8","datePublished":"2026-01-27T12:33+00:00","dateModified":"2026-02-20T18:52+00:00","image":{"@type":"ImageObject","url":"https://dejageruniverse.digital/media/posts/1/Victoria-House-Hero-Image-P1.jpg","height":4088,"width":4088},"description":"De Jager Antiques is supernatural horror fantasy web series by Daniel Leirgulen. Always free to read.  Book 1 - Victoria House, part 1. ","author":{"@type":"Person","name":"Daniel Leirgulen","url":"https://dejageruniverse.digital/authors/jdhaff/"},"publisher":{"@type":"Organization","name":"Daniel Leirgulen","logo":{"@type":"ImageObject","url":"https://dejageruniverse.digital/media/website/De-Jager-Symbol.png","height":186,"width":85}}}</script>      
         <noscript>
             <style>
                 img[loading] {
@@ -123,22 +123,71 @@
   </p>
 <hr class="separator separator--long-line" />
 
-    <h5 id="chapter-selection">
-      Chapter Selection
-    </h5>
+    <h4 id="chapter-selection-pt1" class="align-center">
+      Chapter Selection (Pt1)
+    </h4>
 <div><style>
-.chapter-nav {
-  font-family: "Archivo Narrow", sans-serif;
-  font-size: 15px;
-  font-weight: 700;
+.chapter-wrapper {
+  width: 100%;
   display: flex;
-  gap: 6px;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Archivo Narrow", sans-serif;
+  font-weight: 700;
 }
 
-.chapter-nav a,
-.chapter-nav span {
-  color: #000000;
+/* Desktop size */
+@media (min-width: 768px) {
+  .chapter-wrapper {
+    font-size: 16px;
+  }
+}
+
+/* Mobile keeps original size */
+@media (max-width: 767px) {
+  .chapter-wrapper {
+    font-size: 15px;
+  }
+}
+
+.chapter-prev,
+.chapter-next {
+  width: 60px;
+  text-align: center;
+  font-size: 22px;
+  font-weight: 900;
+  cursor: pointer;
+  user-select: none;
+}
+
+.chapter-prev a,
+.chapter-next a {
   text-decoration: none;
+  color: #000000;
+}
+
+.chapter-prev a:hover,
+.chapter-next a:hover {
+  color: #FF9C00;
+}
+
+.chapter-prev.disabled,
+.chapter-next.disabled {
+  color: #9d9d9d;
+  pointer-events: none;
+  cursor: default;
+}
+
+.chapter-nav {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex: 1;
+}
+
+.chapter-nav a {
+  text-decoration: none;
+  color: #000000;
 }
 
 .chapter-nav a:hover {
@@ -149,20 +198,68 @@
   color: #9d9d9d;
   pointer-events: none;
   cursor: default;
+  user-select: none;
 }
 </style>
 
-<div class="chapter-nav">
-  <a href="https://dejageruniverse.digital/book1chapter1">1</a>
-  <a href="https://dejageruniverse.digital/book1chapter2">2</a>
-  <a href="https://dejageruniverse.digital/book1chapter3">3</a>
-  <a href="https://dejageruniverse.digital/book1chapter4">4</a>
-  <a href="https://dejageruniverse.digital/book1chapter5">5</a>
-  <a href="https://dejageruniverse.digital/book1chapter6">6</a>
-  <a href="https://dejageruniverse.digital/book1chapter7">7</a>
-  <a href="https://dejageruniverse.digital/book1chapter8">8</a>
+<div class="chapter-wrapper">
+
+  <div class="chapter-prev">
+    <span id="prevArrow">❮</span>
+  </div>
+
+  <div class="chapter-nav">
+    <a href="https://dejageruniverse.digital/book1chapter1">1</a>
+    <a href="https://dejageruniverse.digital/book1chapter2">2</a>
+    <a href="https://dejageruniverse.digital/book1chapter3">3</a>
+    <a href="https://dejageruniverse.digital/book1chapter4">4</a>
+    <a href="https://dejageruniverse.digital/book1chapter5">5</a>
+    <a href="https://dejageruniverse.digital/book1chapter6">6</a>
+    <a href="https://dejageruniverse.digital/book1chapter7">7</a>
+    <a href="https://dejageruniverse.digital/book1chapter8">8</a>
+  </div>
+
+  <div class="chapter-next">
+    <span id="nextArrow">❯</span>
+  </div>
+
 </div>
-</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const links = document.querySelectorAll(".chapter-nav a");
+  const currentURL = window.location.href.replace(/\/$/, "");
+  let currentIndex = -1;
+
+  links.forEach((link, index) => {
+    const linkURL = link.href.replace(/\/$/, "");
+
+    if (currentURL === linkURL) {
+      link.classList.add("active");
+      currentIndex = index;
+    }
+  });
+
+  const prevArrow = document.getElementById("prevArrow");
+  const nextArrow = document.getElementById("nextArrow");
+
+  if (currentIndex > 0) {
+    const prevLink = links[currentIndex - 1].href;
+    prevArrow.innerHTML = `<a href="${prevLink}">❮</a>`;
+  } else {
+    prevArrow.parentElement.classList.add("disabled");
+  }
+
+  if (currentIndex < links.length - 1 && currentIndex !== -1) {
+    const nextLink = links[currentIndex + 1].href;
+    nextArrow.innerHTML = `<a href="${nextLink}">❯</a>`;
+  } else {
+    nextArrow.parentElement.classList.add("disabled");
+  }
+
+});
+</script></div>
 <hr class="separator separator--long-line" />
                      
                      <footer>
