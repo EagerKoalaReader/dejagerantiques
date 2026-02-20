@@ -3,7 +3,7 @@
     <title>De Jager Antiques</title>
     <link href="https://dejageruniverse.digital/feed.xml" rel="self" />
     <link href="https://dejageruniverse.digital" />
-    <updated>2026-02-20T18:58:39+00:00</updated>
+    <updated>2026-02-20T19:19:13+00:00</updated>
     <author>
         <name>Daniel Leirgulen</name>
     </author>
@@ -77,8 +77,8 @@
   </p>
 <hr class="separator separator--long-line" />
 
-    <h4 id="chapter-selection-pt-8" class="align-center">
-      Chapter Selection (Pt 8)
+    <h4 id="chapter-selection-part-8" class="align-center">
+      Chapter Selection (Part 8)
     </h4>
 <div><style>
 .chapter-wrapper {
@@ -106,7 +106,6 @@
 
 .chapter-prev,
 .chapter-next {
-  width: 60px;
   text-align: center;
   font-size: 22px;
   font-weight: 900;
@@ -188,7 +187,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   links.forEach((link, index) => {
     const linkURL = link.href.replace(/\/$/, "");
-
     if (currentURL === linkURL) {
       link.classList.add("active");
       currentIndex = index;
@@ -244,8 +242,8 @@ document.addEventListener("DOMContentLoaded", function () {
   </p>
 <hr class="separator separator--long-line" />
 
-    <h4 id="chapter-selection-pt-7" class="align-center">
-      Chapter Selection (Pt 7)
+    <h4 id="chapter-selection-part-7" class="align-center">
+      Chapter Selection (Part 7)
     </h4>
 <div><style>
 .chapter-wrapper {
@@ -273,7 +271,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .chapter-prev,
 .chapter-next {
-  width: 60px;
   text-align: center;
   font-size: 22px;
   font-weight: 900;
@@ -355,7 +352,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   links.forEach((link, index) => {
     const linkURL = link.href.replace(/\/$/, "");
-
     if (currentURL === linkURL) {
       link.classList.add("active");
       currentIndex = index;
@@ -415,8 +411,8 @@ document.addEventListener("DOMContentLoaded", function () {
   </p>
 <hr class="separator separator--long-line" />
 
-    <h4 id="chapter-selection-pt-6" class="align-center">
-      Chapter Selection (Pt 6)
+    <h4 id="chapter-selection-part-6" class="align-center">
+      Chapter Selection (Part 6)
     </h4>
 <div><style>
 .chapter-wrapper {
@@ -444,7 +440,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .chapter-prev,
 .chapter-next {
-  width: 60px;
   text-align: center;
   font-size: 22px;
   font-weight: 900;
@@ -526,7 +521,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   links.forEach((link, index) => {
     const linkURL = link.href.replace(/\/$/, "");
-
     if (currentURL === linkURL) {
       link.classList.add("active");
       currentIndex = index;
@@ -582,8 +576,8 @@ document.addEventListener("DOMContentLoaded", function () {
   </p>
 <hr class="separator separator--long-line" />
 
-    <h4 id="chapter-selection-pt-5" class="align-center">
-      Chapter Selection (Pt 5)
+    <h4 id="chapter-selection-part-5" class="align-center">
+      Chapter Selection (Part 5)
     </h4>
 <div><style>
 .chapter-wrapper {
@@ -611,7 +605,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .chapter-prev,
 .chapter-next {
-  width: 60px;
   text-align: center;
   font-size: 22px;
   font-weight: 900;
@@ -693,7 +686,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   links.forEach((link, index) => {
     const linkURL = link.href.replace(/\/$/, "");
-
     if (currentURL === linkURL) {
       link.classList.add("active");
       currentIndex = index;
@@ -754,8 +746,8 @@ document.addEventListener("DOMContentLoaded", function () {
   </p>
 <hr class="separator separator--long-line" />
 
-    <h4 id="chapter-selection-pt-4" class="align-center">
-      Chapter Selection (Pt 4)
+    <h4 id="chapter-selection-part-4" class="align-center">
+      Chapter Selection (Part 4)
     </h4>
 <div><style>
 .chapter-wrapper {
@@ -783,7 +775,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .chapter-prev,
 .chapter-next {
-  width: 60px;
   text-align: center;
   font-size: 22px;
   font-weight: 900;
@@ -865,7 +856,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   links.forEach((link, index) => {
     const linkURL = link.href.replace(/\/$/, "");
-
     if (currentURL === linkURL) {
       link.classList.add("active");
       currentIndex = index;
@@ -921,8 +911,8 @@ document.addEventListener("DOMContentLoaded", function () {
   </p>
 <hr class="separator separator--long-line" />
 
-    <h4 id="chapter-selection-pt-3" class="align-center">
-      Chapter Selection (Pt 3)
+    <h4 id="chapter-selection-part-3" class="align-center">
+      Chapter Selection (Part 3)
     </h4>
 <div><style>
 .chapter-wrapper {
@@ -950,7 +940,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .chapter-prev,
 .chapter-next {
-  width: 60px;
   text-align: center;
   font-size: 22px;
   font-weight: 900;
@@ -1032,7 +1021,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   links.forEach((link, index) => {
     const linkURL = link.href.replace(/\/$/, "");
-
     if (currentURL === linkURL) {
       link.classList.add("active");
       currentIndex = index;
@@ -1088,8 +1076,8 @@ document.addEventListener("DOMContentLoaded", function () {
   </p>
 <hr class="separator separator--long-line" />
 
-    <h4 id="chapter-selection-pt-2" class="align-center">
-      Chapter Selection (Pt 2)
+    <h4 id="chapter-selection-part-2" class="align-center">
+      Chapter Selection (Part 2)
     </h4>
 <div><style>
 .chapter-wrapper {
@@ -1117,7 +1105,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .chapter-prev,
 .chapter-next {
-  width: 60px;
   text-align: center;
   font-size: 22px;
   font-weight: 900;
@@ -1199,7 +1186,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   links.forEach((link, index) => {
     const linkURL = link.href.replace(/\/$/, "");
-
     if (currentURL === linkURL) {
       link.classList.add("active");
       currentIndex = index;
@@ -1260,8 +1246,8 @@ document.addEventListener("DOMContentLoaded", function () {
   </p>
 <hr class="separator separator--long-line" />
 
-    <h4 id="chapter-selection-pt1" class="align-center">
-      Chapter Selection (Pt1)
+    <h4 id="chapter-selection-part-1" class="align-center">
+      Chapter Selection (Part 1)
     </h4>
 <div><style>
 .chapter-wrapper {
@@ -1289,7 +1275,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 .chapter-prev,
 .chapter-next {
-  width: 60px;
   text-align: center;
   font-size: 22px;
   font-weight: 900;
@@ -1371,7 +1356,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   links.forEach((link, index) => {
     const linkURL = link.href.replace(/\/$/, "");
-
     if (currentURL === linkURL) {
       link.classList.add("active");
       currentIndex = index;
