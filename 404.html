@@ -120,9 +120,6 @@
     </ul>
 
 
-    <!-- Orange Divider -->
-    <div class="menu-social-divider"></div>
-
     <!-- Social Icons -->
     <div class="menu-social">
 
@@ -145,40 +142,34 @@
 </nav>
 
 <style>
-/* Reduce space between menu and divider */
+
+/* Reduce space between menu and icons */
 .menu > ul {
     margin-bottom: 0.75rem;
 }
 
-/* Thin orange divider */
-.menu-social-divider {
-    height: 1px;
-    background-color: #FF9C00;
-    margin: 0;
-}
-
-/* Social container */
+/* Align icons with menu text (menu text uses 2rem side margin) */
 .menu-social {
     display: flex;
     justify-content: flex-start;
     gap: 10px;
-    margin: 0;
+    margin: 0 2rem 1.5rem 2rem;
     padding: 0;
 }
 
-/* Icons */
+/* Icon styling */
 .social-icon img {
     max-height: 40px;
     height: auto;
     display: block;
-    transition: transform 0.25s ease, filter 0.25s ease;
+    transition: transform 0.25s ease;
 }
 
-/* Hover effect */
+/* Hover: translate only */
 .social-icon:hover img {
     transform: translateY(4px);
-    filter: brightness(0) saturate(100%) invert(63%) sepia(96%) saturate(641%) hue-rotate(360deg) brightness(101%) contrast(101%);
 }
+
 </style>
 
   <div class="container__content"> <header class="top"> <div class="top__item"> <a class="logo" href="https://dejageruniverse.digital/">  <img src="https://dejageruniverse.digital/media/website/De-Jager-Symbol.png" alt="De Jager Antiques" width="85" height="186">  </a> </div> <div class="top__item top__item--right">  <button class="menu-toggle js-menu-toggle" aria-label="Menu" aria-expanded="false"> <span class="menu-toggle-box"> <span class="menu-toggle-inner"> Menu</span> </span> </button>  </div> </header>   <main class="main page page--error">
