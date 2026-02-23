@@ -114,9 +114,6 @@
                 ABOUT MYTHWORK
                 </a>              
         </li>
-            <li>
-               <span>*</span>
-        </li>
     </ul>
 
 
@@ -126,14 +123,16 @@
         <a href="https://bsky.app/profile/knackpublishing.bsky.social" 
            target="_blank" 
            rel="noopener noreferrer" 
-           class="social-icon">
+           class="social-icon tooltip"
+           data-tooltip="Get notifications on Bluesky">
             <img src="/Bluesky-normal.png" alt="Bluesky">
         </a>
 
         <a href="https://www.threads.com/@knackpublishing" 
            target="_blank" 
            rel="noopener noreferrer" 
-           class="social-icon">
+           class="social-icon tooltip"
+           data-tooltip="Get notifications on Threads">
             <img src="/Threads-normal.png" alt="Threads">
         </a>
 
@@ -148,7 +147,7 @@
     margin-bottom: 0.75rem;
 }
 
-/* Align icons with menu text (menu text uses 2rem side margin) */
+/* Align icons with menu text */
 .menu-social {
     display: flex;
     justify-content: flex-start;
@@ -158,6 +157,10 @@
 }
 
 /* Icon styling */
+.social-icon {
+    position: relative;
+}
+
 .social-icon img {
     max-height: 40px;
     height: auto;
@@ -168,6 +171,29 @@
 /* Hover: translate only */
 .social-icon:hover img {
     transform: translateY(4px);
+}
+
+/* Tooltip styling */
+.tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    bottom: 110%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #000000;
+    color: #ffffff;
+    font-family: "Archivo Narrow", sans-serif;
+    font-size: 13px;
+    padding: 6px 8px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.tooltip:hover::after {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-2px);
 }
 
 </style>
