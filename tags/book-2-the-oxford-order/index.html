@@ -490,6 +490,10 @@ function toggleDejagerSave(e, title, url) {
   opacity: 1;
 }
 
+/* ========================= */
+/* MOBILE POSITIONING FIX */
+/* ========================= */
+
 @media (max-width: 768px) {
   .floating-actions {
     top: auto;
@@ -505,6 +509,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Only show on single post pages
   if (!document.body.classList.contains("post-template")) return;
+
+  // EXCLUDE SAVED PAGE
+  if (window.location.pathname === "/saved" || 
+      window.location.pathname === "/saved/") return;
 
   const container = document.createElement("div");
   container.className = "floating-actions";
