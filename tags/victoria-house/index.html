@@ -787,5 +787,120 @@ function toggleDejagerSave(e, title, url) {
   // Update tooltip
   button.setAttribute('aria-label', 'Saved to your links');
 }
+</script>
+<!-- FLOATING POST ACTIONS -->
+<style>
+.floating-actions {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+}
+
+.floating-actions a {
+  width: 40px;
+  height: 40px;
+  background: #000000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  position: relative;
+}
+
+.floating-actions a:hover {
+  background: #FF9C00;
+}
+
+.floating-actions svg {
+  width: 20px;
+  height: 20px;
+  fill: #ffffff;
+  transition: fill 0.15s ease;
+}
+
+.floating-actions a:hover svg {
+  fill: #000000;
+}
+
+/* Tooltips */
+.floating-actions a[aria-label]::after {
+  content: attr(aria-label);
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #000000;
+  color: #ffffff;
+  font-size: 12px;
+  padding: 6px 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  margin-right: 8px;
+}
+
+.floating-actions a:hover::after {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .floating-actions {
+    top: auto;
+    bottom: 20px;
+    transform: none;
+    right: 0;
+  }
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  // Only show on single post pages
+  if (!document.body.classList.contains("post-template")) return;
+
+  const container = document.createElement("div");
+  container.className = "floating-actions";
+
+  const currentURL = window.location.href;
+
+  // Get the visible post title (same as {{title}})
+  const heading = document.querySelector('.content h1');
+  const currentTitle = heading ? heading.textContent.trim() : document.title;
+
+  container.innerHTML = `
+    <a href="https://raindrop.io/add?link=${encodeURIComponent(currentURL)}&title=${encodeURIComponent(currentTitle)}"
+       target="_blank"
+       rel="noopener"
+       aria-label="Save to Raindrop.io">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2C7 7 4 10 4 14a8 8 0 0 0 16 0c0-4-3-7-8-12z"/>
+      </svg>
+    </a>
+
+    <a href="#"
+       aria-label="Copy link"
+       onclick="navigator.clipboard.writeText('${currentURL}'); return false;">
+      <svg viewBox="0 0 24 24">
+        <path d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/>
+      </svg>
+    </a>
+
+    <a href="#"
+       aria-label="Add to saved List"
+       onclick="toggleDejagerSave(event, '${currentTitle}', '${currentURL}')">
+      <svg viewBox="0 0 24 24">
+        <path d="M12 2l8 5v10l-8 5-8-5V7l8-5z"/>
+      </svg>
+    </a>
+  `;
+
+  document.body.appendChild(container);
+
+});
 </script> 
  </body> </html>
