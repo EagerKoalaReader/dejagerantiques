@@ -24,7 +24,7 @@
             <link rel="preload" href="https://dejageruniverse.digital/assets/dynamic/fonts/archivonarrow/archivonarrow-italic.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="stylesheet" href="https://dejageruniverse.digital/assets/css/style.css?v=884fe775ffe87ae08aeaa12985c2779b">	
-        <script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://dejageruniverse.digital/saved/"},"headline":"Saved URL's","datePublished":"2026-02-13T14:11+00:00","dateModified":"2026-02-28T22:51+00:00","image":{"@type":"ImageObject","url":"https://dejageruniverse.digital/media/posts/20/De-Jager-Universe-Save-List-Hero-Image.jpg","height":4088,"width":4088},"description":"Stored locally - your saved links will clear if you delete cookies and browsing data.","author":{"@type":"Person","name":"Daniel Leirgulen","url":"https://dejageruniverse.digital/authors/jdhaff/"},"publisher":{"@type":"Organization","name":"Daniel Leirgulen","logo":{"@type":"ImageObject","url":"https://dejageruniverse.digital/media/website/De-Jager-Symbol-White.png","height":186,"width":85}}}</script>      
+        <script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://dejageruniverse.digital/saved/"},"headline":"Saved URL's","datePublished":"2026-02-13T14:11+00:00","dateModified":"2026-03-02T21:01+00:00","image":{"@type":"ImageObject","url":"https://dejageruniverse.digital/media/posts/20/De-Jager-Universe-Save-List-Hero-Image.jpg","height":4088,"width":4088},"description":"Stored locally - your saved links will clear if you delete cookies and browsing data.","author":{"@type":"Person","name":"Daniel Leirgulen","url":"https://dejageruniverse.digital/authors/jdhaff/"},"publisher":{"@type":"Organization","name":"Daniel Leirgulen","logo":{"@type":"ImageObject","url":"https://dejageruniverse.digital/media/website/De-Jager-Symbol-White.png","height":186,"width":85}}}</script>      
         <noscript>
             <style>
                 img[loading] {
@@ -183,43 +183,272 @@
 </style>
 
   <div class="container__content"> <header class="top"> <div class="top__item"> <a class="logo" href="https://dejageruniverse.digital/">  <img src="https://dejageruniverse.digital/media/website/De-Jager-Symbol-White.png" alt="De Jager Antiques" width="85" height="186">  </a> </div> <div class="top__item top__item--right">  <button class="menu-toggle js-menu-toggle" aria-label="Menu" aria-expanded="false"> <span class="menu-toggle-box"> <span class="menu-toggle-inner"> Menu</span> </span> </button>  </div> </header> <main class="main post">  <article class="content"> <div class="main__left">   <figure class="hero"> <img src="https://dejageruniverse.digital/media/posts/20/De-Jager-Universe-Save-List-Hero-Image.jpg"  srcset="https://dejageruniverse.digital/media/posts/20/responsive/De-Jager-Universe-Save-List-Hero-Image-xs.jpg 300w ,https://dejageruniverse.digital/media/posts/20/responsive/De-Jager-Universe-Save-List-Hero-Image-sm.jpg 480w ,https://dejageruniverse.digital/media/posts/20/responsive/De-Jager-Universe-Save-List-Hero-Image-md.jpg 768w ,https://dejageruniverse.digital/media/posts/20/responsive/De-Jager-Universe-Save-List-Hero-Image-lg.jpg 1024w ,https://dejageruniverse.digital/media/posts/20/responsive/De-Jager-Universe-Save-List-Hero-Image-xl.jpg 1280w ,https://dejageruniverse.digital/media/posts/20/responsive/De-Jager-Universe-Save-List-Hero-Image-2xl.jpg 1600w" sizes="(min-width: 1800px) 50vw, (min-width: 900px) 40vw, 100vw"   loading="eager" height="4088" width="4088" alt="">  </figure>   <header> <h1>Saved URL&#x27;s</h1>  </header> </div> <div class="main__right">  <div class="content__entry"> <div><div id="dejager-saved-wrapper">
+
   <p class="saved-note">
     Saved links are stored in your browser. Clearing cookies or site data will remove them.
   </p>
 
   <div id="dejager-saved-list"></div>
+
+  <hr style="margin:40px 0;">
+
+  <div id="dejager-backup-controls">
+
+    <h3>Archive Backup</h3>
+
+    <div class="backup-buttons">
+
+      <!-- DOWNLOAD BUTTON -->
+      <button id="exportSaved" class="backup-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 3v12"/>
+          <path d="M7 10l5 5 5-5"/>
+          <path d="M5 21h14"/>
+        </svg>
+        Export Saved Archive
+      </button>
+
+      <!-- UPLOAD BUTTON -->
+      <label for="importSaved" class="backup-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 21V9"/>
+          <path d="M7 14l5-5 5 5"/>
+          <path d="M5 3h14"/>
+        </svg>
+        Restore Archive
+      </label>
+
+      <input type="file" id="importSaved" accept=".json" hidden>
+
+    </div>
+
+    <p class="backup-note">
+      Export your archive to prevent loss if browser data is cleared.
+    </p>
+
+  </div>
+
 </div>
 
-<script>
-function renderSavedLinks() {
-  const container = document.getElementById('dejager-saved-list');
-  let saved = JSON.parse(localStorage.getItem('dejagerSaved')) || [];
+<style>
+#dejager-saved-wrapper {
+  font-family: 'Archivo Narrow', sans-serif;
+}
 
-  if (saved.length === 0) {
-    container.innerHTML = "<p>No saved links yet.</p>";
-    return;
+.saved-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.delete-link {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  padding: 8px 14px;
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.delete-link:hover {
+  background: #FF9C00;
+  color: #000000;
+}
+
+/* ========================= */
+/* BACKUP SECTION */
+/* ========================= */
+
+#dejager-backup-controls {
+  margin-top: 10px;
+}
+
+#dejager-backup-controls h3 {
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: normal;
+}
+
+.backup-buttons {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.backup-btn {
+  background: #000000;
+  color: #ffffff;
+  font-size: 16px;
+  font-family: 'Archivo Narrow', sans-serif;
+  padding: 12px 20px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  height: 48px;
+  text-transform: none; /* prevents forced ALL CAPS */
+}
+
+.backup-btn svg {
+  width: 18px;
+  height: 18px;
+  stroke: #ffffff;
+  fill: none;
+  transition: stroke 0.2s ease;
+}
+
+.backup-btn:hover {
+  background: #FF9C00;
+  color: #000000;
+}
+
+.backup-btn:hover svg {
+  stroke: #000000;
+}
+
+.backup-note {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #666;
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media (max-width: 768px) {
+
+  .saved-item {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  container.innerHTML = saved.map((item, index) => `
-    <div class="saved-item">
-      <div class="saved-text">
-        <strong>${item.title}</strong><br>
-        <a href="${item.url}" target="_blank">${item.url}</a>
+  .delete-link {
+    margin-top: 10px;
+    width: 100%;
+  }
+
+  .backup-buttons {
+    flex-direction: column;
+  }
+
+  .backup-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+}
+</style>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+
+  function renderSavedLinks() {
+    const container = document.getElementById('dejager-saved-list');
+    let saved = JSON.parse(localStorage.getItem('dejagerSaved')) || [];
+
+    if (saved.length === 0) {
+      container.innerHTML = "<p>No saved links yet.</p>";
+      return;
+    }
+
+    container.innerHTML = saved.map((item, index) => `
+      <div class="saved-item">
+        <div class="saved-text">
+          <strong>${item.title}</strong><br>
+          <a href="${item.url}" target="_blank">${item.url}</a>
+        </div>
+        <button class="delete-link" data-index="${index}">Delete</button>
       </div>
-      <button class="delete-link" onclick="deleteSaved(${index})">Delete</button>
-    </div>
-  `).join('');
-}
+    `).join('');
+  }
 
-function deleteSaved(index) {
-  let saved = JSON.parse(localStorage.getItem('dejagerSaved')) || [];
-  saved.splice(index, 1);
-  localStorage.setItem('dejagerSaved', JSON.stringify(saved));
+  function deleteSaved(index) {
+    let saved = JSON.parse(localStorage.getItem('dejagerSaved')) || [];
+    saved.splice(index, 1);
+    localStorage.setItem('dejagerSaved', JSON.stringify(saved));
+    renderSavedLinks();
+  }
+
+  document.addEventListener("click", function(e) {
+    if (e.target.classList.contains("delete-link")) {
+      deleteSaved(parseInt(e.target.dataset.index));
+    }
+  });
+
   renderSavedLinks();
-}
 
-renderSavedLinks();
+  // EXPORT
+  document.getElementById("exportSaved").addEventListener("click", function() {
+
+    const saved = JSON.parse(localStorage.getItem("dejagerSaved")) || [];
+
+    if (saved.length === 0) {
+      alert("No saved items to export.");
+      return;
+    }
+
+    const blob = new Blob(
+      [JSON.stringify(saved, null, 2)],
+      { type: "application/json" }
+    );
+
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+
+    a.href = url;
+    a.download = "dejager-archive-backup.json";
+
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // IMPORT
+  document.getElementById("importSaved").addEventListener("change", function(event) {
+
+    const file = event.target.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+
+    reader.onload = function(e) {
+
+      try {
+        const imported = JSON.parse(e.target.result);
+
+        if (!Array.isArray(imported)) {
+          alert("Invalid archive file.");
+          return;
+        }
+
+        localStorage.setItem("dejagerSaved", JSON.stringify(imported));
+
+        alert("Archive restored successfully.");
+        location.reload();
+
+      } catch (error) {
+        alert("Invalid file format.");
+      }
+
+    };
+
+    reader.readAsText(file);
+  });
+
+});
 </script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -241,11 +470,11 @@ renderSavedLinks();
 </div>
 <hr class="separator separator--long-line" />  <footer>  <div class="content__tag-share">      <div class="content__share"> <div class="scl-container"><a href="https://digg.com/submit?url=https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F&title=Saved%20URL's" class="scl-btn p-digg"   ><svg width="40" height="24" aria-hidden="false">
 									<use xlink:href="https://dejageruniverse.digital/media/plugins/socialSharing/svg-map.svg#digg" />
-							  </svg> </a><a href="mailto:?subject=Saved%20URL's&body=Saved%20links%20are%20stored%20in%20your%20browser.%20Clearing%20cookies%20or%20site%20data%20will%20remove%20them.%20%7B%20%22%40context%22%3A%20%22https%3A%2F%2Fschema.org%22%2C%20%22%40type%22%3A%20%22CollectionPage%22%2C%20%22name%22%3A%20%22Saved%20Links%22%2C%20%22url%22%3A%20%22https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F%22%2C%20%22description%22%3A%20%22A%20user-specific%20collection%20page%20displaying%20saved%20De%20Jager%20Universe%20chapters%20and%20stories%2C%20stored%20locally%20within%20the%20browser.%22%2C%20%22isPartOf%22%3A%20%7B%20%22%40type%22%3A%20%22WebSite%22%2C%20%22name%22%3A%20%22De%20Jager%20Universe%22%2C%20%22url%22%3A%20%22https%3A%2F%2Fdejageruniverse.digital%2F%22%20%7D%2C%20%22publisher%22%3A%20%7B%20%22%40type%22%3A%20%22Organization%22%2C%20%22name%22%3A%20%22De%20Jager%20Universe%22%20%7D%20%7D" class="scl-btn p-email"   ><svg width="24" height="24" aria-hidden="false">
+							  </svg> </a><a href="mailto:?subject=Saved%20URL's&body=Saved%20links%20are%20stored%20in%20your%20browser.%20Clearing%20cookies%20or%20site%20data%20will%20remove%20them.%20Export%20Saved%20Archive%20Restore%20Archive%20Export%20your%20archive%20to%20prevent%20loss%20if%20browser%20data%20is%20cleared.%20%23dejager-saved-wrapper%20%7B%20font-family%3A%20'Archivo%20Narrow'%2C%20sans-serif%3B%20%7D%20.saved-item%20%7B%20display%3A%20flex%3B%20justify-content%3A%20space-between%3B%20align-items%3A%20center%3B%20padding%3A%2012px%200%3B%20border-bottom%3A%201px%20solid%20%23eee%3B%20%7D%20.delete-link%20%7B%20background%3A%20%23000000%3B%20color%3A%20%23ffffff%3B%20border%3A%20none%3B%20padding%3A%208px%2014px%3B%20font-family%3A%20'Archivo%20Narrow'%2C%20sans-serif%3B%20font-size%3A%2016px%3B%20cursor%3A%20pointer%3B%20transition%3A%200.2s%20ease%3B%20%7D%20.delete-link%3Ahover%20%7B%20background%3A%20%23FF9C00%3B%20color%3A%20%23000000%3B%20%7D%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20%2F*%20BACKUP%20SECTION%20*%2F%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20%23dejager-backup-controls%20%7B%20margin-top%3A%2010px%3B%20%7D%20%23dejager-backup-controls%20h3%20%7B%20margin-bottom%3A%2020px%3B%20font-size%3A%2018px%3B%20font-weight%3A%20normal%3B%20%7D%20.backup-buttons%26hellip%3B" class="scl-btn p-email"   ><svg width="24" height="24" aria-hidden="false">
 									<use xlink:href="https://dejageruniverse.digital/media/plugins/socialSharing/svg-map.svg#email" />
 							  </svg> </a><a href="https://www.facebook.com/sharer.php?t=Saved%20URL's&u=https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F" class="scl-btn p-facebook"   ><svg width="24" height="24" aria-hidden="false">
 									<use xlink:href="https://dejageruniverse.digital/media/plugins/socialSharing/svg-map.svg#facebook" />
-							  </svg> </a><a href="javascript:void(0)" class="scl-btn p-mastodon"  data-title="Saved%20URL's" data-url="https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F" data-excerpt="Saved%20links%20are%20stored%20in%20your%20browser.%20Clearing%20cookies%20or%20site%20data%20will%20remove%20them.%20%7B%20%22%40context%22%3A%20%22https%3A%2F%2Fschema.org%22%2C%20%22%40type%22%3A%20%22CollectionPage%22%2C%20%22name%22%3A%20%22Saved%20Links%22%2C%20%22url%22%3A%20%22https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F%22%2C%20%22description%22%3A%20%22A%20user-specific%20collection%20page%20displaying%20saved%20De%20Jager%20Universe%20chapters%20and%20stories%2C%20stored%20locally%20within%20the%20browser.%22%2C%20%22isPartOf%22%3A%20%7B%20%22%40type%22%3A%20%22WebSite%22%2C%20%22name%22%3A%20%22De%20Jager%20Universe%22%2C%20%22url%22%3A%20%22https%3A%2F%2Fdejageruniverse.digital%2F%22%20%7D%2C%20%22publisher%22%3A%20%7B%20%22%40type%22%3A%20%22Organization%22%2C%20%22name%22%3A%20%22De%20Jager%20Universe%22%20%7D%20%7D" onclick="MastodonShare(event)" ><svg width="24" height="24" aria-hidden="false">
+							  </svg> </a><a href="javascript:void(0)" class="scl-btn p-mastodon"  data-title="Saved%20URL's" data-url="https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F" data-excerpt="Saved%20links%20are%20stored%20in%20your%20browser.%20Clearing%20cookies%20or%20site%20data%20will%20remove%20them.%20Export%20Saved%20Archive%20Restore%20Archive%20Export%20your%20archive%20to%20prevent%20loss%20if%20browser%20data%20is%20cleared.%20%23dejager-saved-wrapper%20%7B%20font-family%3A%20'Archivo%20Narrow'%2C%20sans-serif%3B%20%7D%20.saved-item%20%7B%20display%3A%20flex%3B%20justify-content%3A%20space-between%3B%20align-items%3A%20center%3B%20padding%3A%2012px%200%3B%20border-bottom%3A%201px%20solid%20%23eee%3B%20%7D%20.delete-link%20%7B%20background%3A%20%23000000%3B%20color%3A%20%23ffffff%3B%20border%3A%20none%3B%20padding%3A%208px%2014px%3B%20font-family%3A%20'Archivo%20Narrow'%2C%20sans-serif%3B%20font-size%3A%2016px%3B%20cursor%3A%20pointer%3B%20transition%3A%200.2s%20ease%3B%20%7D%20.delete-link%3Ahover%20%7B%20background%3A%20%23FF9C00%3B%20color%3A%20%23000000%3B%20%7D%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20%2F*%20BACKUP%20SECTION%20*%2F%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20%23dejager-backup-controls%20%7B%20margin-top%3A%2010px%3B%20%7D%20%23dejager-backup-controls%20h3%20%7B%20margin-bottom%3A%2020px%3B%20font-size%3A%2018px%3B%20font-weight%3A%20normal%3B%20%7D%20.backup-buttons%26hellip%3B" onclick="MastodonShare(event)" ><svg width="24" height="24" aria-hidden="false">
 									<use xlink:href="https://dejageruniverse.digital/media/plugins/socialSharing/svg-map.svg#mastodon" />
 							  </svg> </a><a href="https://www.facebook.com/dialog/send?link=https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F&app_id=&redirect_uri=https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F" class="scl-btn p-messenger"   ><svg width="24" height="24" aria-hidden="false">
 									<use xlink:href="https://dejageruniverse.digital/media/plugins/socialSharing/svg-map.svg#messenger" />
