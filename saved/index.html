@@ -24,7 +24,7 @@
             <link rel="preload" href="https://dejageruniverse.digital/assets/dynamic/fonts/archivonarrow/archivonarrow-italic.woff2" as="font" type="font/woff2" crossorigin>
         
         <link rel="stylesheet" href="https://dejageruniverse.digital/assets/css/style.css?v=884fe775ffe87ae08aeaa12985c2779b">	
-        <script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://dejageruniverse.digital/saved/"},"headline":"Saved URL's","datePublished":"2026-02-13T14:11+00:00","dateModified":"2026-03-02T21:01+00:00","image":{"@type":"ImageObject","url":"https://dejageruniverse.digital/media/posts/20/De-Jager-Universe-Save-List-Hero-Image.jpg","height":4088,"width":4088},"description":"Stored locally - your saved links will clear if you delete cookies and browsing data.","author":{"@type":"Person","name":"Daniel Leirgulen","url":"https://dejageruniverse.digital/authors/jdhaff/"},"publisher":{"@type":"Organization","name":"Daniel Leirgulen","logo":{"@type":"ImageObject","url":"https://dejageruniverse.digital/media/website/De-Jager-Symbol-White.png","height":186,"width":85}}}</script>      
+        <script type="application/ld+json">{"@context":"http://schema.org","@type":"Article","mainEntityOfPage":{"@type":"WebPage","@id":"https://dejageruniverse.digital/saved/"},"headline":"Saved URL's","datePublished":"2026-02-13T14:11+00:00","dateModified":"2026-03-02T21:34+00:00","image":{"@type":"ImageObject","url":"https://dejageruniverse.digital/media/posts/20/De-Jager-Universe-Save-List-Hero-Image.jpg","height":4088,"width":4088},"description":"Stored locally - your saved links will clear if you delete cookies and browsing data.","author":{"@type":"Person","name":"Daniel Leirgulen","url":"https://dejageruniverse.digital/authors/jdhaff/"},"publisher":{"@type":"Organization","name":"Daniel Leirgulen","logo":{"@type":"ImageObject","url":"https://dejageruniverse.digital/media/website/De-Jager-Symbol-White.png","height":186,"width":85}}}</script>      
         <noscript>
             <style>
                 img[loading] {
@@ -237,6 +237,10 @@
   font-family: 'Archivo Narrow', sans-serif;
 }
 
+/* ========================= */
+/* SAVED ITEMS */
+/* ========================= */
+
 .saved-item {
   display: flex;
   justify-content: space-between;
@@ -252,8 +256,12 @@
   padding: 8px 14px;
   font-family: 'Archivo Narrow', sans-serif;
   font-size: 16px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.2;
   cursor: pointer;
   transition: 0.2s ease;
+  text-transform: none;
 }
 
 .delete-link:hover {
@@ -281,11 +289,16 @@
   flex-wrap: wrap;
 }
 
+/* HARD-LOCK UNIFIED BUTTON STYLING */
 .backup-btn {
   background: #000000;
   color: #ffffff;
-  font-size: 16px;
-  font-family: 'Archivo Narrow', sans-serif;
+  font-family: 'Archivo Narrow', sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.2 !important;
+  text-transform: none !important;
   padding: 12px 20px;
   border: none;
   cursor: pointer;
@@ -295,7 +308,13 @@
   text-decoration: none;
   transition: all 0.2s ease;
   height: 48px;
-  text-transform: none; /* prevents forced ALL CAPS */
+}
+
+/* Remove default button browser styling */
+button.backup-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
 }
 
 .backup-btn svg {
@@ -470,11 +489,11 @@ document.addEventListener("DOMContentLoaded", function() {
 </div>
 <hr class="separator separator--long-line" />  <footer>  <div class="content__tag-share">      <div class="content__share"> <div class="scl-container"><a href="https://digg.com/submit?url=https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F&title=Saved%20URL's" class="scl-btn p-digg"   ><svg width="40" height="24" aria-hidden="false">
 									<use xlink:href="https://dejageruniverse.digital/media/plugins/socialSharing/svg-map.svg#digg" />
-							  </svg> </a><a href="mailto:?subject=Saved%20URL's&body=Saved%20links%20are%20stored%20in%20your%20browser.%20Clearing%20cookies%20or%20site%20data%20will%20remove%20them.%20Export%20Saved%20Archive%20Restore%20Archive%20Export%20your%20archive%20to%20prevent%20loss%20if%20browser%20data%20is%20cleared.%20%23dejager-saved-wrapper%20%7B%20font-family%3A%20'Archivo%20Narrow'%2C%20sans-serif%3B%20%7D%20.saved-item%20%7B%20display%3A%20flex%3B%20justify-content%3A%20space-between%3B%20align-items%3A%20center%3B%20padding%3A%2012px%200%3B%20border-bottom%3A%201px%20solid%20%23eee%3B%20%7D%20.delete-link%20%7B%20background%3A%20%23000000%3B%20color%3A%20%23ffffff%3B%20border%3A%20none%3B%20padding%3A%208px%2014px%3B%20font-family%3A%20'Archivo%20Narrow'%2C%20sans-serif%3B%20font-size%3A%2016px%3B%20cursor%3A%20pointer%3B%20transition%3A%200.2s%20ease%3B%20%7D%20.delete-link%3Ahover%20%7B%20background%3A%20%23FF9C00%3B%20color%3A%20%23000000%3B%20%7D%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20%2F*%20BACKUP%20SECTION%20*%2F%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20%23dejager-backup-controls%20%7B%20margin-top%3A%2010px%3B%20%7D%20%23dejager-backup-controls%20h3%20%7B%20margin-bottom%3A%2020px%3B%20font-size%3A%2018px%3B%20font-weight%3A%20normal%3B%20%7D%20.backup-buttons%26hellip%3B" class="scl-btn p-email"   ><svg width="24" height="24" aria-hidden="false">
+							  </svg> </a><a href="mailto:?subject=Saved%20URL's&body=Saved%20links%20are%20stored%20in%20your%20browser.%20Clearing%20cookies%20or%20site%20data%20will%20remove%20them.%20Export%20Saved%20Archive%20Restore%20Archive%20Export%20your%20archive%20to%20prevent%20loss%20if%20browser%20data%20is%20cleared.%20%23dejager-saved-wrapper%20%7B%20font-family%3A%20'Archivo%20Narrow'%2C%20sans-serif%3B%20%7D%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20%2F*%20SAVED%20ITEMS%20*%2F%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20.saved-item%20%7B%20display%3A%20flex%3B%20justify-content%3A%20space-between%3B%20align-items%3A%20center%3B%20padding%3A%2012px%200%3B%20border-bottom%3A%201px%20solid%20%23eee%3B%20%7D%20.delete-link%20%7B%20background%3A%20%23000000%3B%20color%3A%20%23ffffff%3B%20border%3A%20none%3B%20padding%3A%208px%2014px%3B%20font-family%3A%20'Archivo%20Narrow'%2C%20sans-serif%3B%20font-size%3A%2016px%3B%20font-weight%3A%20400%3B%20letter-spacing%3A%200%3B%20line-height%3A%201.2%3B%20cursor%3A%20pointer%3B%20transition%3A%200.2s%20ease%3B%20text-transform%3A%20none%3B%20%7D%20.delete-link%3Ahover%20%7B%20background%3A%20%23FF9C00%3B%20color%3A%20%23000000%3B%20%7D%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20%2F*%20BACKUP%20SECTION%20*%2F%20%2F*%26hellip%3B" class="scl-btn p-email"   ><svg width="24" height="24" aria-hidden="false">
 									<use xlink:href="https://dejageruniverse.digital/media/plugins/socialSharing/svg-map.svg#email" />
 							  </svg> </a><a href="https://www.facebook.com/sharer.php?t=Saved%20URL's&u=https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F" class="scl-btn p-facebook"   ><svg width="24" height="24" aria-hidden="false">
 									<use xlink:href="https://dejageruniverse.digital/media/plugins/socialSharing/svg-map.svg#facebook" />
-							  </svg> </a><a href="javascript:void(0)" class="scl-btn p-mastodon"  data-title="Saved%20URL's" data-url="https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F" data-excerpt="Saved%20links%20are%20stored%20in%20your%20browser.%20Clearing%20cookies%20or%20site%20data%20will%20remove%20them.%20Export%20Saved%20Archive%20Restore%20Archive%20Export%20your%20archive%20to%20prevent%20loss%20if%20browser%20data%20is%20cleared.%20%23dejager-saved-wrapper%20%7B%20font-family%3A%20'Archivo%20Narrow'%2C%20sans-serif%3B%20%7D%20.saved-item%20%7B%20display%3A%20flex%3B%20justify-content%3A%20space-between%3B%20align-items%3A%20center%3B%20padding%3A%2012px%200%3B%20border-bottom%3A%201px%20solid%20%23eee%3B%20%7D%20.delete-link%20%7B%20background%3A%20%23000000%3B%20color%3A%20%23ffffff%3B%20border%3A%20none%3B%20padding%3A%208px%2014px%3B%20font-family%3A%20'Archivo%20Narrow'%2C%20sans-serif%3B%20font-size%3A%2016px%3B%20cursor%3A%20pointer%3B%20transition%3A%200.2s%20ease%3B%20%7D%20.delete-link%3Ahover%20%7B%20background%3A%20%23FF9C00%3B%20color%3A%20%23000000%3B%20%7D%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20%2F*%20BACKUP%20SECTION%20*%2F%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20%23dejager-backup-controls%20%7B%20margin-top%3A%2010px%3B%20%7D%20%23dejager-backup-controls%20h3%20%7B%20margin-bottom%3A%2020px%3B%20font-size%3A%2018px%3B%20font-weight%3A%20normal%3B%20%7D%20.backup-buttons%26hellip%3B" onclick="MastodonShare(event)" ><svg width="24" height="24" aria-hidden="false">
+							  </svg> </a><a href="javascript:void(0)" class="scl-btn p-mastodon"  data-title="Saved%20URL's" data-url="https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F" data-excerpt="Saved%20links%20are%20stored%20in%20your%20browser.%20Clearing%20cookies%20or%20site%20data%20will%20remove%20them.%20Export%20Saved%20Archive%20Restore%20Archive%20Export%20your%20archive%20to%20prevent%20loss%20if%20browser%20data%20is%20cleared.%20%23dejager-saved-wrapper%20%7B%20font-family%3A%20'Archivo%20Narrow'%2C%20sans-serif%3B%20%7D%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20%2F*%20SAVED%20ITEMS%20*%2F%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20.saved-item%20%7B%20display%3A%20flex%3B%20justify-content%3A%20space-between%3B%20align-items%3A%20center%3B%20padding%3A%2012px%200%3B%20border-bottom%3A%201px%20solid%20%23eee%3B%20%7D%20.delete-link%20%7B%20background%3A%20%23000000%3B%20color%3A%20%23ffffff%3B%20border%3A%20none%3B%20padding%3A%208px%2014px%3B%20font-family%3A%20'Archivo%20Narrow'%2C%20sans-serif%3B%20font-size%3A%2016px%3B%20font-weight%3A%20400%3B%20letter-spacing%3A%200%3B%20line-height%3A%201.2%3B%20cursor%3A%20pointer%3B%20transition%3A%200.2s%20ease%3B%20text-transform%3A%20none%3B%20%7D%20.delete-link%3Ahover%20%7B%20background%3A%20%23FF9C00%3B%20color%3A%20%23000000%3B%20%7D%20%2F*%20%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%3D%20*%2F%20%2F*%20BACKUP%20SECTION%20*%2F%20%2F*%26hellip%3B" onclick="MastodonShare(event)" ><svg width="24" height="24" aria-hidden="false">
 									<use xlink:href="https://dejageruniverse.digital/media/plugins/socialSharing/svg-map.svg#mastodon" />
 							  </svg> </a><a href="https://www.facebook.com/dialog/send?link=https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F&app_id=&redirect_uri=https%3A%2F%2Fdejageruniverse.digital%2Fsaved%2F" class="scl-btn p-messenger"   ><svg width="24" height="24" aria-hidden="false">
 									<use xlink:href="https://dejageruniverse.digital/media/plugins/socialSharing/svg-map.svg#messenger" />
