@@ -41,7 +41,7 @@
 <style>
 #dejager-rss {
   position: fixed;
-  left: 50px; /* UPDATED */
+  left: 60px;
   bottom: 40px;
   z-index: 9999;
 }
@@ -70,16 +70,14 @@
   display: flex;
   flex-direction: column;
 
-  border: 1px solid #222;
+  border: 2px solid #FF9C00; /* UPDATED */
 
-  /* ANIMATION */
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-/* ACTIVE STATE */
 #rss-menu.active {
   opacity: 1;
   transform: translateY(0);
@@ -118,7 +116,7 @@
   opacity: 1;
 }
 
-/* Mobile positioning */
+/* Mobile */
 @media (max-width: 768px) {
   #dejager-rss {
     left: 50px;
@@ -128,7 +126,7 @@
 </style>
 
 <div id="dejager-rss" data-tooltip="Add to your preferred reader">
-  <img src="/RSS-normal.png" alt="RSS">
+  <img src="/RSS-normal.png" alt="RSS"> <!-- UPDATED PATH -->
   <div id="rss-menu"></div>
 </div>
 
@@ -142,10 +140,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const trigger = document.getElementById("dejager-rss");
 
   const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  // =========================
-  // BUILD MENU
-  // =========================
 
   if (isMobile) {
 
@@ -166,20 +160,20 @@ document.addEventListener("DOMContentLoaded", function () {
         Select your reader
       </div>
 
-      <a href="https://feedly.com/i/subscription/feed/${encoded}" target="_blank">Feedly</a>
+      <!-- FIXED FEEDLY LINK -->
+      <a href="https://feedly.com/i/subscription/feed/${feed}" target="_blank">Feedly</a>
+
       <a href="https://www.inoreader.com/?add_feed=${encoded}" target="_blank">Inoreader</a>
       <a href="https://www.newsblur.com/?url=${encoded}" target="_blank">NewsBlur</a>
       <a href="https://theoldreader.com/feeds/subscribe?url=${encoded}" target="_blank">The Old Reader</a>
+
       <a href="${feed}" target="_blank">Open Raw Feed</a>
       <a href="#" id="copyFeed">Copy Feed URL</a>
     `;
 
   }
 
-  // =========================
-  // TOGGLE MENU (WITH FADE)
-  // =========================
-
+  // Toggle
   trigger.addEventListener("click", function (e) {
     e.stopPropagation();
     menu.classList.toggle("active");
@@ -189,10 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
     menu.classList.remove("active");
   });
 
-  // =========================
-  // COPY FUNCTION
-  // =========================
-
+  // Copy
   document.addEventListener("click", function (e) {
     if (e.target.id === "copyFeed") {
       e.preventDefault();
@@ -204,10 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 
-  // =========================
-  // MOBILE SHARE
-  // =========================
-
+  // Mobile share
   document.addEventListener("click", function (e) {
     if (e.target.id === "shareFeed") {
       e.preventDefault();
