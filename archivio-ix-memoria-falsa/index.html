@@ -41,7 +41,7 @@
 <style>
 #dejager-rss {
   position: fixed;
-  left: 60px;
+  left: 50px;
   bottom: 40px;
   z-index: 9999;
 }
@@ -70,7 +70,7 @@
   display: flex;
   flex-direction: column;
 
-  border: 2px solid #FF9C00; /* UPDATED */
+  border: 2px solid #FF9C00;
 
   opacity: 0;
   transform: translateY(10px);
@@ -116,17 +116,26 @@
   opacity: 1;
 }
 
-/* Mobile */
+/* ========================= */
+/* MOBILE POSITION FIX */
+/* ========================= */
+
 @media (max-width: 768px) {
   #dejager-rss {
-    left: 50px;
-    bottom: 20px;
+    left: 20px;
+    top: 80px;
+    bottom: auto;
+  }
+
+  #rss-menu {
+    bottom: auto;
+    top: 50px;
   }
 }
 </style>
 
 <div id="dejager-rss" data-tooltip="Add to your preferred reader">
-  <img src="/RSS-normal.png" alt="RSS"> <!-- UPDATED PATH -->
+  <img src="/RSS-normal.png" alt="RSS">
   <div id="rss-menu"></div>
 </div>
 
@@ -160,8 +169,8 @@ document.addEventListener("DOMContentLoaded", function () {
         Select your reader
       </div>
 
-      <!-- FIXED FEEDLY LINK -->
-      <a href="https://feedly.com/i/subscription/feed/${feed}" target="_blank">Feedly</a>
+      <!-- FIXED FEEDLY FALLBACK -->
+      <a href="https://feedly.com/i/discover/sources/search/feed/${encoded}" target="_blank">Feedly</a>
 
       <a href="https://www.inoreader.com/?add_feed=${encoded}" target="_blank">Inoreader</a>
       <a href="https://www.newsblur.com/?url=${encoded}" target="_blank">NewsBlur</a>
@@ -173,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   }
 
-  // Toggle
+  // Toggle menu
   trigger.addEventListener("click", function (e) {
     e.stopPropagation();
     menu.classList.toggle("active");
