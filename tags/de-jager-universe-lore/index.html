@@ -35,7 +35,195 @@
         <meta name="yandex-verification" content="baea699a3e61f251" />
     </head>
     <body class="tag-template">
-        
+        <!-- RSS FLOATING BUTTON + SMART DROPDOWN -->
+
+<style>
+#dejager-rss {
+  position: fixed;
+  left: 50px; /* UPDATED */
+  bottom: 40px;
+  z-index: 9999;
+}
+
+#dejager-rss img {
+  width: 40px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+#dejager-rss img:hover {
+  transform: translateY(4px);
+}
+
+/* DROPDOWN */
+#rss-menu {
+  position: absolute;
+  bottom: 60px;
+  left: 0;
+  background: #000;
+  color: #fff;
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 14px;
+  min-width: 220px;
+
+  display: flex;
+  flex-direction: column;
+
+  border: 1px solid #222;
+
+  /* ANIMATION */
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+/* ACTIVE STATE */
+#rss-menu.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+#rss-menu a {
+  padding: 10px;
+  text-decoration: none;
+  color: #fff;
+  display: block;
+}
+
+#rss-menu a:hover {
+  background: #FF9C00;
+  color: #000;
+}
+
+/* Tooltip */
+#dejager-rss::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #000;
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 8px;
+  opacity: 0;
+  white-space: nowrap;
+  transition: 0.15s;
+}
+
+#dejager-rss:hover::after {
+  opacity: 1;
+}
+
+/* Mobile positioning */
+@media (max-width: 768px) {
+  #dejager-rss {
+    left: 50px;
+    bottom: 20px;
+  }
+}
+</style>
+
+<div id="dejager-rss" data-tooltip="Add to your preferred reader">
+  <img src="/media/RSS-normal.png" alt="RSS">
+  <div id="rss-menu"></div>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const feed = "https://dejageruniverse.digital/feed.xml";
+  const encoded = encodeURIComponent(feed);
+
+  const menu = document.getElementById("rss-menu");
+  const trigger = document.getElementById("dejager-rss");
+
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  // =========================
+  // BUILD MENU
+  // =========================
+
+  if (isMobile) {
+
+    menu.innerHTML = `
+      <div style="padding:10px; font-size:12px; opacity:0.7;">
+        Add to your reader
+      </div>
+
+      <a href="#" id="shareFeed">Share / Open in App</a>
+      <a href="${feed}" target="_blank">Open Feed</a>
+      <a href="#" id="copyFeed">Copy Feed URL</a>
+    `;
+
+  } else {
+
+    menu.innerHTML = `
+      <div style="padding:10px; font-size:12px; opacity:0.7;">
+        Select your reader
+      </div>
+
+      <a href="https://feedly.com/i/subscription/feed/${encoded}" target="_blank">Feedly</a>
+      <a href="https://www.inoreader.com/?add_feed=${encoded}" target="_blank">Inoreader</a>
+      <a href="https://www.newsblur.com/?url=${encoded}" target="_blank">NewsBlur</a>
+      <a href="https://theoldreader.com/feeds/subscribe?url=${encoded}" target="_blank">The Old Reader</a>
+      <a href="${feed}" target="_blank">Open Raw Feed</a>
+      <a href="#" id="copyFeed">Copy Feed URL</a>
+    `;
+
+  }
+
+  // =========================
+  // TOGGLE MENU (WITH FADE)
+  // =========================
+
+  trigger.addEventListener("click", function (e) {
+    e.stopPropagation();
+    menu.classList.toggle("active");
+  });
+
+  document.addEventListener("click", function () {
+    menu.classList.remove("active");
+  });
+
+  // =========================
+  // COPY FUNCTION
+  // =========================
+
+  document.addEventListener("click", function (e) {
+    if (e.target.id === "copyFeed") {
+      e.preventDefault();
+      navigator.clipboard.writeText(feed);
+      e.target.textContent = "Copied!";
+      setTimeout(() => {
+        e.target.textContent = "Copy Feed URL";
+      }, 1500);
+    }
+  });
+
+  // =========================
+  // MOBILE SHARE
+  // =========================
+
+  document.addEventListener("click", function (e) {
+    if (e.target.id === "shareFeed") {
+      e.preventDefault();
+
+      if (navigator.share) {
+        navigator.share({
+          title: "De Jager Universe Feed",
+          url: feed
+        });
+      } else {
+        window.location.href = feed;
+      }
+    }
+  });
+
+});
+</script>
 
 
 
