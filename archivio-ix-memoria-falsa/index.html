@@ -36,7 +36,9 @@
 <style>:root { --scl-container-gap: 0.4rem; --scl-container-direction: row; --scl-btn-hover-effect: translate3d(0, -2px, 0); --scl-btn-gap: 0.4rem; --scl-btn-transition: all 0.24s ease-out; --scl-btn-border-radius: 3px; --scl-btn-font-family: var(--body-font); --scl-btn-font-size: 0.875rem; --scl-btn-line-height: inherit; --scl-icon-size: 22px; --scl-btn-bg: rgba(69,71,75,0); --scl-btn-bg-hover: rgba(25,23,23,0); --scl-btn-txticon-color: #000000; --scl-btn-txticon-color-hover: #FD9900; --scl-btn-padding: 0px 0px; --scl-hsla-luminance: 10%; }.scl-container { display: flex; flex-direction: var(--scl-container-direction); flex-wrap: wrap; gap: var(--scl-container-gap); }.scl-btn { all: unset; align-items: center; background-color: var(--scl-btn-bg); border-radius: var(--scl-btn-border-radius); color: var(--scl-btn-txticon-color); cursor: pointer; display: inline-flex; font-family: var(--scl-btn-font-family); font-size: var(--scl-btn-font-size); gap: var(--scl-btn-gap); line-height: var(--scl-btn-line-height); padding: var(--scl-btn-padding); will-change: transform; transition: var(--scl-btn-transition); } .scl-btn:hover { background-color: var(--scl-btn-bg-hover); color: var(--scl-btn-txticon-color-hover); transform: var(--scl-btn-hover-effect); } .scl-btn svg { fill: var(--scl-btn-txticon-color); height: var(--scl-icon-size); pointer-events: none; transition: var(--scl-btn-transition); width: var(--scl-icon-size); } .scl-btn:hover svg { fill: var(--scl-btn-txticon-color-hover); }.scl-btn.p-digg{--s-platform-h:216;--s-platform-s:100%;--s-platform-l:42%;--s-platform-a:1;}.scl-btn.p-email{--s-platform-h:0;--s-platform-s:0%;--s-platform-l:24%;--s-platform-a:1;}.scl-btn.p-facebook{--s-platform-h:217;--s-platform-s:100%;--s-platform-l:51%;--s-platform-a:1;}.scl-btn.p-mastodon{--s-platform-h:252;--s-platform-s:59%;--s-platform-l:51%;--s-platform-a:1;}.scl-btn.p-messenger{--s-platform-h:212;--s-platform-s:100%;--s-platform-l:51%;--s-platform-a:1;}.scl-btn.p-reddit{--s-platform-h:16;--s-platform-s:100%;--s-platform-l:50%;--s-platform-a:1;}.scl-btn.p-twitter{--s-platform-h:0;--s-platform-s:0%;--s-platform-l:0%;--s-platform-a:1;}.scl-btn.p-whatsapp{--s-platform-h:142;--s-platform-s:70%;--s-platform-l:48%;--s-platform-a:1;}</style>
     </head>
     <body class="post-template">
-        <style>
+        <!-- RSS FLOATING BUTTON -->
+
+<style>
 #dejager-rss {
   position: fixed;
   left: 60px;
@@ -54,6 +56,7 @@
   transform: translateY(4px);
 }
 
+/* DROPDOWN */
 #rss-menu {
   position: absolute;
   bottom: 60px;
@@ -67,7 +70,7 @@
   display: flex;
   flex-direction: column;
 
-  border: 2px solid #FF9C00;
+  border: 1px solid #FF9C00;
 
   opacity: 0;
   transform: translateY(10px);
@@ -85,6 +88,7 @@
   padding: 10px;
   color: #fff;
   text-decoration: none;
+  display: block;
 }
 
 #rss-menu a:hover {
@@ -92,28 +96,30 @@
   color: #000;
 }
 
-#copy-toast {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
+/* TOOLTIP (FIXED POSITIONING) */
+#dejager-rss::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 0; /* FIXED */
+  transform: none; /* FIXED */
   background: #000;
   color: #fff;
-  padding: 10px 16px;
-  border: 2px solid #FF9C00;
-  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 12px;
+  padding: 6px 8px;
   opacity: 0;
-  transition: 0.2s;
+  white-space: nowrap;
+  transition: 0.15s;
 }
 
-#copy-toast.show {
+#dejager-rss:hover::after {
   opacity: 1;
 }
 
 /* MOBILE POSITION */
 @media (max-width: 768px) {
   #dejager-rss {
-    left: 20px;
+    left: 15px;
     top: 80px;
     bottom: auto;
   }
@@ -122,50 +128,52 @@
     top: 50px;
     bottom: auto;
   }
+
+  /* keep tooltip fully visible */
+  #dejager-rss::after {
+    left: 0;
+    right: auto;
+  }
 }
 </style>
 
-<div id="dejager-rss">
+<div id="dejager-rss" data-tooltip="Add to your preferred reader">
   <img src="/RSS-normal.png" alt="RSS">
-  <div id="rss-menu"></div>
-</div>
+  <div id="rss-menu">
 
-<div id="copy-toast">URL copied</div>
+    <div style="padding:10px; font-size:12px; opacity:0.7;">
+      Select your reader
+    </div>
+
+    <!-- These WILL open apps if installed -->
+    <a href="https://feedly.com/i/discover/sources/search/feed/https://dejageruniverse.digital/feed.xml" target="_blank">
+      Feedly
+    </a>
+
+    <a href="https://www.inoreader.com/?add_feed=https://dejageruniverse.digital/feed.xml" target="_blank">
+      Inoreader
+    </a>
+
+    <a href="https://www.newsblur.com/?url=https://dejageruniverse.digital/feed.xml" target="_blank">
+      NewsBlur
+    </a>
+
+    <a href="https://theoldreader.com/feeds/subscribe?url=https://dejageruniverse.digital/feed.xml" target="_blank">
+      The Old Reader
+    </a>
+
+    <a href="https://dejageruniverse.digital/feed.xml" target="_blank">
+      Open Feed
+    </a>
+
+  </div>
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-  const feed = "https://dejageruniverse.digital/feed.xml";
-  const encoded = encodeURIComponent(feed);
-
-  const menu = document.getElementById("rss-menu");
   const trigger = document.getElementById("dejager-rss");
-  const toast = document.getElementById("copy-toast");
-
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  // =========================
-  // BUILD MENU
-  // =========================
-
-  if (isMobile) {
-    menu.innerHTML = `
-      <a href="#" id="shareBtn">Open in Reader App</a>
-      <a href="#" id="copyBtn">Copy Feed URL</a>
-      <a href="${feed}" target="_blank">Open Feed</a>
-    `;
-  } else {
-    menu.innerHTML = `
-      <a href="https://feedly.com/i/discover/sources/search/feed/${encoded}" target="_blank">Feedly</a>
-      <a href="https://www.inoreader.com/?add_feed=${encoded}" target="_blank">Inoreader</a>
-      <a href="#" id="copyBtn">Copy Feed URL</a>
-      <a href="${feed}" target="_blank">Open Feed</a>
-    `;
-  }
-
-  // =========================
-  // TOGGLE MENU
-  // =========================
+  const menu = document.getElementById("rss-menu");
 
   trigger.onclick = function (e) {
     e.stopPropagation();
@@ -175,50 +183,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.onclick = function () {
     menu.classList.remove("active");
   };
-
-  // =========================
-  // COPY (WORKS EVERYWHERE)
-  // =========================
-
-  function copyText(text) {
-    // Fallback method (works everywhere)
-    const input = document.createElement("textarea");
-    input.value = text;
-    document.body.appendChild(input);
-    input.select();
-    document.execCommand("copy");
-    document.body.removeChild(input);
-
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 1500);
-  }
-
-  document.addEventListener("click", function (e) {
-    if (e.target.id === "copyBtn") {
-      e.preventDefault();
-      e.stopPropagation();
-      copyText(feed);
-    }
-  });
-
-  // =========================
-  // SHARE (MUST BE DIRECT CLICK)
-  // =========================
-
-  document.addEventListener("click", function (e) {
-    if (e.target.id === "shareBtn") {
-      e.preventDefault();
-
-      if (navigator.share) {
-        navigator.share({
-          title: "De Jager Universe Feed",
-          url: feed
-        });
-      } else {
-        window.open(feed, "_blank");
-      }
-    }
-  });
 
 });
 </script>

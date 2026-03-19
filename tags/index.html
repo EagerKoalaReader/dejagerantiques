@@ -35,7 +35,9 @@
         <meta name="yandex-verification" content="baea699a3e61f251" />
     </head>
     <body class="tags-template">
-        <style>
+        <!-- RSS FLOATING BUTTON -->
+
+<style>
 #dejager-rss {
   position: fixed;
   left: 60px;
@@ -53,6 +55,7 @@
   transform: translateY(4px);
 }
 
+/* DROPDOWN */
 #rss-menu {
   position: absolute;
   bottom: 60px;
@@ -66,7 +69,7 @@
   display: flex;
   flex-direction: column;
 
-  border: 2px solid #FF9C00;
+  border: 1px solid #FF9C00;
 
   opacity: 0;
   transform: translateY(10px);
@@ -84,6 +87,7 @@
   padding: 10px;
   color: #fff;
   text-decoration: none;
+  display: block;
 }
 
 #rss-menu a:hover {
@@ -91,28 +95,30 @@
   color: #000;
 }
 
-#copy-toast {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
+/* TOOLTIP (FIXED POSITIONING) */
+#dejager-rss::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 120%;
+  left: 0; /* FIXED */
+  transform: none; /* FIXED */
   background: #000;
   color: #fff;
-  padding: 10px 16px;
-  border: 2px solid #FF9C00;
-  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 12px;
+  padding: 6px 8px;
   opacity: 0;
-  transition: 0.2s;
+  white-space: nowrap;
+  transition: 0.15s;
 }
 
-#copy-toast.show {
+#dejager-rss:hover::after {
   opacity: 1;
 }
 
 /* MOBILE POSITION */
 @media (max-width: 768px) {
   #dejager-rss {
-    left: 20px;
+    left: 15px;
     top: 80px;
     bottom: auto;
   }
@@ -121,50 +127,52 @@
     top: 50px;
     bottom: auto;
   }
+
+  /* keep tooltip fully visible */
+  #dejager-rss::after {
+    left: 0;
+    right: auto;
+  }
 }
 </style>
 
-<div id="dejager-rss">
+<div id="dejager-rss" data-tooltip="Add to your preferred reader">
   <img src="/RSS-normal.png" alt="RSS">
-  <div id="rss-menu"></div>
-</div>
+  <div id="rss-menu">
 
-<div id="copy-toast">URL copied</div>
+    <div style="padding:10px; font-size:12px; opacity:0.7;">
+      Select your reader
+    </div>
+
+    <!-- These WILL open apps if installed -->
+    <a href="https://feedly.com/i/discover/sources/search/feed/https://dejageruniverse.digital/feed.xml" target="_blank">
+      Feedly
+    </a>
+
+    <a href="https://www.inoreader.com/?add_feed=https://dejageruniverse.digital/feed.xml" target="_blank">
+      Inoreader
+    </a>
+
+    <a href="https://www.newsblur.com/?url=https://dejageruniverse.digital/feed.xml" target="_blank">
+      NewsBlur
+    </a>
+
+    <a href="https://theoldreader.com/feeds/subscribe?url=https://dejageruniverse.digital/feed.xml" target="_blank">
+      The Old Reader
+    </a>
+
+    <a href="https://dejageruniverse.digital/feed.xml" target="_blank">
+      Open Feed
+    </a>
+
+  </div>
+</div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
-  const feed = "https://dejageruniverse.digital/feed.xml";
-  const encoded = encodeURIComponent(feed);
-
-  const menu = document.getElementById("rss-menu");
   const trigger = document.getElementById("dejager-rss");
-  const toast = document.getElementById("copy-toast");
-
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
-
-  // =========================
-  // BUILD MENU
-  // =========================
-
-  if (isMobile) {
-    menu.innerHTML = `
-      <a href="#" id="shareBtn">Open in Reader App</a>
-      <a href="#" id="copyBtn">Copy Feed URL</a>
-      <a href="${feed}" target="_blank">Open Feed</a>
-    `;
-  } else {
-    menu.innerHTML = `
-      <a href="https://feedly.com/i/discover/sources/search/feed/${encoded}" target="_blank">Feedly</a>
-      <a href="https://www.inoreader.com/?add_feed=${encoded}" target="_blank">Inoreader</a>
-      <a href="#" id="copyBtn">Copy Feed URL</a>
-      <a href="${feed}" target="_blank">Open Feed</a>
-    `;
-  }
-
-  // =========================
-  // TOGGLE MENU
-  // =========================
+  const menu = document.getElementById("rss-menu");
 
   trigger.onclick = function (e) {
     e.stopPropagation();
@@ -174,50 +182,6 @@ document.addEventListener("DOMContentLoaded", function () {
   document.onclick = function () {
     menu.classList.remove("active");
   };
-
-  // =========================
-  // COPY (WORKS EVERYWHERE)
-  // =========================
-
-  function copyText(text) {
-    // Fallback method (works everywhere)
-    const input = document.createElement("textarea");
-    input.value = text;
-    document.body.appendChild(input);
-    input.select();
-    document.execCommand("copy");
-    document.body.removeChild(input);
-
-    toast.classList.add("show");
-    setTimeout(() => toast.classList.remove("show"), 1500);
-  }
-
-  document.addEventListener("click", function (e) {
-    if (e.target.id === "copyBtn") {
-      e.preventDefault();
-      e.stopPropagation();
-      copyText(feed);
-    }
-  });
-
-  // =========================
-  // SHARE (MUST BE DIRECT CLICK)
-  // =========================
-
-  document.addEventListener("click", function (e) {
-    if (e.target.id === "shareBtn") {
-      e.preventDefault();
-
-      if (navigator.share) {
-        navigator.share({
-          title: "De Jager Universe Feed",
-          url: feed
-        });
-      } else {
-        window.open(feed, "_blank");
-      }
-    }
-  });
 
 });
 </script>
