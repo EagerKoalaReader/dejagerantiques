@@ -115,14 +115,33 @@
   opacity: 1;
 }
 
-/* ========================= */
-/* MOBILE POSITION FIX */
-/* ========================= */
+/* TOAST NOTIFICATION */
+#copy-toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: #000;
+  color: #fff;
+  font-family: 'Archivo Narrow', sans-serif;
+  font-size: 14px;
+  padding: 10px 16px;
+  border: 2px solid #FF9C00;
+  opacity: 0;
+  transition: 0.25s ease;
+  z-index: 99999;
+}
 
+#copy-toast.active {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* MOBILE POSITION */
 @media (max-width: 768px) {
   #dejager-rss {
-    left: 15px;
-    top: 77px;
+    left: 20px;
+    top: 80px;
     bottom: auto;
   }
 
@@ -138,6 +157,8 @@
   <div id="rss-menu"></div>
 </div>
 
+<div id="copy-toast">URL copied</div>
+
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -146,8 +167,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const menu = document.getElementById("rss-menu");
   const trigger = document.getElementById("dejager-rss");
+  const toast = document.getElementById("copy-toast");
 
   const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+  // =========================
+  // BUILD MENU
+  // =========================
 
   if (isMobile) {
 
@@ -156,9 +182,9 @@ document.addEventListener("DOMContentLoaded", function () {
         Add to your reader
       </div>
 
-      <a href="#" id="shareFeed">Share / Open in App</a>
-      <a href="${feed}" target="_blank">Open Feed</a>
+      <a href="#" id="shareFeed">Open in Reader App</a>
       <a href="#" id="copyFeed">Copy Feed URL</a>
+      <a href="${feed}" target="_blank">Open Feed</a>
     `;
 
   } else {
@@ -168,20 +194,21 @@ document.addEventListener("DOMContentLoaded", function () {
         Select your reader
       </div>
 
-      <!-- FIXED FEEDLY FALLBACK -->
       <a href="https://feedly.com/i/discover/sources/search/feed/${encoded}" target="_blank">Feedly</a>
-
       <a href="https://www.inoreader.com/?add_feed=${encoded}" target="_blank">Inoreader</a>
       <a href="https://www.newsblur.com/?url=${encoded}" target="_blank">NewsBlur</a>
       <a href="https://theoldreader.com/feeds/subscribe?url=${encoded}" target="_blank">The Old Reader</a>
 
-      <a href="${feed}" target="_blank">Open Raw Feed</a>
       <a href="#" id="copyFeed">Copy Feed URL</a>
+      <a href="${feed}" target="_blank">Open Raw Feed</a>
     `;
 
   }
 
-  // Toggle menu
+  // =========================
+  // TOGGLE
+  // =========================
+
   trigger.addEventListener("click", function (e) {
     e.stopPropagation();
     menu.classList.toggle("active");
@@ -191,19 +218,31 @@ document.addEventListener("DOMContentLoaded", function () {
     menu.classList.remove("active");
   });
 
-  // Copy
+  // =========================
+  // COPY (FIXED)
+  // =========================
+
   document.addEventListener("click", function (e) {
     if (e.target.id === "copyFeed") {
       e.preventDefault();
-      navigator.clipboard.writeText(feed);
-      e.target.textContent = "Copied!";
-      setTimeout(() => {
-        e.target.textContent = "Copy Feed URL";
-      }, 1500);
+      e.stopPropagation();
+
+      navigator.clipboard.writeText(feed).then(() => {
+
+        toast.classList.add("active");
+
+        setTimeout(() => {
+          toast.classList.remove("active");
+        }, 1500);
+
+      });
     }
   });
 
-  // Mobile share
+  // =========================
+  // MOBILE SHARE (FIXED)
+  // =========================
+
   document.addEventListener("click", function (e) {
     if (e.target.id === "shareFeed") {
       e.preventDefault();
@@ -212,9 +251,12 @@ document.addEventListener("DOMContentLoaded", function () {
         navigator.share({
           title: "De Jager Universe Feed",
           url: feed
+        }).catch(() => {
+          window.open(feed, "_blank");
         });
       } else {
-        window.location.href = feed;
+        // Fallback: try opening feed directly
+        window.open(feed, "_blank");
       }
     }
   });
