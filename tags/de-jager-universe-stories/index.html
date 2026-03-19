@@ -35,18 +35,16 @@
         <meta name="yandex-verification" content="baea699a3e61f251" />
     </head>
     <body class="tag-template">
-        <!-- RSS FLOATING BUTTON + SMART DROPDOWN -->
-
-<style>
+        <style>
 #dejager-rss {
   position: fixed;
-  left: 50px;
+  left: 60px;
   bottom: 40px;
   z-index: 9999;
 }
 
 #dejager-rss img {
-  width: 40px;
+  width: 25px;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -55,7 +53,6 @@
   transform: translateY(4px);
 }
 
-/* DROPDOWN */
 #rss-menu {
   position: absolute;
   bottom: 60px;
@@ -74,7 +71,7 @@
   opacity: 0;
   transform: translateY(10px);
   pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transition: 0.2s ease;
 }
 
 #rss-menu.active {
@@ -85,9 +82,8 @@
 
 #rss-menu a {
   padding: 10px;
-  text-decoration: none;
   color: #fff;
-  display: block;
+  text-decoration: none;
 }
 
 #rss-menu a:hover {
@@ -95,46 +91,22 @@
   color: #000;
 }
 
-/* Tooltip */
-#dejager-rss::after {
-  content: attr(data-tooltip);
-  position: absolute;
-  bottom: 110%;
-  left: 50%;
-  transform: translateX(-50%);
-  background: #000;
-  color: #fff;
-  font-size: 12px;
-  padding: 6px 8px;
-  opacity: 0;
-  white-space: nowrap;
-  transition: 0.15s;
-}
-
-#dejager-rss:hover::after {
-  opacity: 1;
-}
-
-/* TOAST NOTIFICATION */
 #copy-toast {
   position: fixed;
   bottom: 30px;
   left: 50%;
-  transform: translateX(-50%) translateY(10px);
+  transform: translateX(-50%);
   background: #000;
   color: #fff;
-  font-family: 'Archivo Narrow', sans-serif;
-  font-size: 14px;
   padding: 10px 16px;
   border: 2px solid #FF9C00;
+  font-family: 'Archivo Narrow', sans-serif;
   opacity: 0;
-  transition: 0.25s ease;
-  z-index: 99999;
+  transition: 0.2s;
 }
 
-#copy-toast.active {
+#copy-toast.show {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
 }
 
 /* MOBILE POSITION */
@@ -146,13 +118,13 @@
   }
 
   #rss-menu {
-    bottom: auto;
     top: 50px;
+    bottom: auto;
   }
 }
 </style>
 
-<div id="dejager-rss" data-tooltip="Add to your preferred reader">
+<div id="dejager-rss">
   <img src="/RSS-normal.png" alt="RSS">
   <div id="rss-menu"></div>
 </div>
@@ -176,86 +148,72 @@ document.addEventListener("DOMContentLoaded", function () {
   // =========================
 
   if (isMobile) {
-
     menu.innerHTML = `
-      <div style="padding:10px; font-size:12px; opacity:0.7;">
-        Add to your reader
-      </div>
-
-      <a href="#" id="shareFeed">Open in Reader App</a>
-      <a href="#" id="copyFeed">Copy Feed URL</a>
+      <a href="#" id="shareBtn">Open in Reader App</a>
+      <a href="#" id="copyBtn">Copy Feed URL</a>
       <a href="${feed}" target="_blank">Open Feed</a>
     `;
-
   } else {
-
     menu.innerHTML = `
-      <div style="padding:10px; font-size:12px; opacity:0.7;">
-        Select your reader
-      </div>
-
       <a href="https://feedly.com/i/discover/sources/search/feed/${encoded}" target="_blank">Feedly</a>
       <a href="https://www.inoreader.com/?add_feed=${encoded}" target="_blank">Inoreader</a>
-      <a href="https://www.newsblur.com/?url=${encoded}" target="_blank">NewsBlur</a>
-      <a href="https://theoldreader.com/feeds/subscribe?url=${encoded}" target="_blank">The Old Reader</a>
-
-      <a href="#" id="copyFeed">Copy Feed URL</a>
-      <a href="${feed}" target="_blank">Open Raw Feed</a>
+      <a href="#" id="copyBtn">Copy Feed URL</a>
+      <a href="${feed}" target="_blank">Open Feed</a>
     `;
-
   }
 
   // =========================
-  // TOGGLE
+  // TOGGLE MENU
   // =========================
 
-  trigger.addEventListener("click", function (e) {
+  trigger.onclick = function (e) {
     e.stopPropagation();
     menu.classList.toggle("active");
-  });
+  };
 
-  document.addEventListener("click", function () {
+  document.onclick = function () {
     menu.classList.remove("active");
-  });
+  };
 
   // =========================
-  // COPY (FIXED)
+  // COPY (WORKS EVERYWHERE)
   // =========================
+
+  function copyText(text) {
+    // Fallback method (works everywhere)
+    const input = document.createElement("textarea");
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand("copy");
+    document.body.removeChild(input);
+
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 1500);
+  }
 
   document.addEventListener("click", function (e) {
-    if (e.target.id === "copyFeed") {
+    if (e.target.id === "copyBtn") {
       e.preventDefault();
       e.stopPropagation();
-
-      navigator.clipboard.writeText(feed).then(() => {
-
-        toast.classList.add("active");
-
-        setTimeout(() => {
-          toast.classList.remove("active");
-        }, 1500);
-
-      });
+      copyText(feed);
     }
   });
 
   // =========================
-  // MOBILE SHARE (FIXED)
+  // SHARE (MUST BE DIRECT CLICK)
   // =========================
 
   document.addEventListener("click", function (e) {
-    if (e.target.id === "shareFeed") {
+    if (e.target.id === "shareBtn") {
       e.preventDefault();
 
       if (navigator.share) {
         navigator.share({
           title: "De Jager Universe Feed",
           url: feed
-        }).catch(() => {
-          window.open(feed, "_blank");
         });
       } else {
-        // Fallback: try opening feed directly
         window.open(feed, "_blank");
       }
     }
