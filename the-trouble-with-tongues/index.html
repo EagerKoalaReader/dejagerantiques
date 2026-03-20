@@ -41,13 +41,13 @@
 <style>
 #dejager-rss {
   position: fixed;
-  left: 60px;
+  left: 50px;
   bottom: 40px;
   z-index: 9999;
 }
 
 #dejager-rss img {
-  width: 25px;
+  width: 40px;
   cursor: pointer;
   transition: transform 0.2s ease;
 }
@@ -70,7 +70,7 @@
   display: flex;
   flex-direction: column;
 
-  border: 1px solid #FF9C00;
+  border: 2px solid #FF9C00;
 
   opacity: 0;
   transform: translateY(10px);
@@ -96,13 +96,12 @@
   color: #000;
 }
 
-/* TOOLTIP (FIXED POSITIONING) */
+/* TOOLTIP */
 #dejager-rss::after {
   content: attr(data-tooltip);
   position: absolute;
   bottom: 120%;
-  left: 0; /* FIXED */
-  transform: none; /* FIXED */
+  left: 0;
   background: #000;
   color: #fff;
   font-size: 12px;
@@ -116,23 +115,27 @@
   opacity: 1;
 }
 
-/* MOBILE POSITION */
+/* ========================= */
+/* MOBILE POSITION (UPDATED) */
+/* ========================= */
+
 @media (max-width: 768px) {
   #dejager-rss {
-    right: 0px;
+    left: auto;
+    right: 0;          /* flush to edge */
+    bottom: 120px;     /* exact offset */
     top: auto;
-    bottom: 120;
   }
 
   #rss-menu {
-    top: 50px;
-    bottom: auto;
+    left: auto;
+    right: 0;          /* align dropdown to right */
+    bottom: 60px;
   }
 
-  /* keep tooltip fully visible */
   #dejager-rss::after {
-    left: 0;
-    right: auto;
+    left: auto;
+    right: 0;          /* keep tooltip visible */
   }
 }
 </style>
@@ -145,7 +148,6 @@
       Select your reader
     </div>
 
-    <!-- These WILL open apps if installed -->
     <a href="https://feedly.com/i/discover/sources/search/feed/https://dejageruniverse.digital/feed.xml" target="_blank">
       Feedly
     </a>
