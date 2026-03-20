@@ -56,7 +56,7 @@
 }
 
 /* ========================= */
-/* DESKTOP DROPDOWN */
+/* DROPDOWN (FADE ONLY) */
 /* ========================= */
 
 #rss-menu {
@@ -75,14 +75,12 @@
   border: 2px solid #FF9C00;
 
   opacity: 0;
-  transform: translateY(10px); /* DOWN */
   pointer-events: none;
-  transition: 0.2s ease;
+  transition: opacity 0.2s ease;
 }
 
 #rss-menu.active {
   opacity: 1;
-  transform: translateY(0);
   pointer-events: auto;
 }
 
@@ -132,14 +130,8 @@
 
   #rss-menu {
     left: auto;
-    right: 0;              /* anchor right */
+    right: 0;
     bottom: 60px;
-
-    transform: translateY(10px); /* START LOWER (for upward motion) */
-  }
-
-  #rss-menu.active {
-    transform: translateY(0); /* moves UP */
   }
 
   #dejager-rss::after {
