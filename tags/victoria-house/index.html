@@ -55,7 +55,10 @@
   transform: translateY(4px);
 }
 
-/* DROPDOWN */
+/* ========================= */
+/* DESKTOP DROPDOWN */
+/* ========================= */
+
 #rss-menu {
   position: absolute;
   bottom: 60px;
@@ -72,7 +75,7 @@
   border: 2px solid #FF9C00;
 
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(10px); /* DOWN */
   pointer-events: none;
   transition: 0.2s ease;
 }
@@ -115,27 +118,35 @@
 }
 
 /* ========================= */
-/* MOBILE POSITION (UPDATED) */
+/* MOBILE */
 /* ========================= */
 
 @media (max-width: 768px) {
+
   #dejager-rss {
     left: auto;
-    right: 0;          /* flush to edge */
-    bottom: 120px;     /* exact offset */
+    right: 0;
+    bottom: 120px;
     top: auto;
   }
 
   #rss-menu {
     left: auto;
-    right: 0;          /* align dropdown to right */
+    right: 0;              /* anchor right */
     bottom: 60px;
+
+    transform: translateY(10px); /* START LOWER (for upward motion) */
+  }
+
+  #rss-menu.active {
+    transform: translateY(0); /* moves UP */
   }
 
   #dejager-rss::after {
     left: auto;
-    right: 0;          /* keep tooltip visible */
+    right: 0;
   }
+
 }
 </style>
 
